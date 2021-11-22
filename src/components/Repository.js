@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import _ from "lodash";
 import { Chart } from "react-charts";
+import { bottom } from "@popperjs/core";
 function Repository() {
   const queries = new URLSearchParams(window.location.search);
   const valueKey = queries.get("value");
@@ -85,14 +86,13 @@ function Repository() {
       myDataArray[2].datums.push(temp2);
     }
   }
-  console.log("myDataArray", myDataArray);
   return [
     <div>
       <p className="repoDetail-heading">
         <b>{valueKey} </b>Chart And Repository Details
       </p>
       <div className="App">
-        <div style={{ width: "500px", height: "500px" }}>
+        <div style={{ width: "500px", height: "500px", margin: "0 0 40px 0" }}>
           <Chart data={myDataArray} series={series} axes={axes} tooltip />
         </div>
       </div>
@@ -105,13 +105,22 @@ function Repository() {
               alt="John"
               className="repoDetail-images"
             />
-            <div>
-              <div>
+            <div className="detailsDiv">
+              <div className="nameDiv">
                 <a target="_blank" href={repoDetailsData.owner.html_url}>
                   {repoDetailsData.name}
                 </a>
               </div>
-              <p className="title">watchers : {repoDetailsData.watchers}</p>
+              <div className="title">Watchers : {repoDetailsData.watchers}</div>
+              <div className="title">
+                Visibility : {repoDetailsData.visibility}
+              </div>
+              <div className="title">
+                Open Issues : {repoDetailsData.open_issues}
+              </div>
+              <div className="title">
+                Fork Count : {repoDetailsData.forks_count}
+              </div>
             </div>
           </div>
         );

@@ -7,7 +7,7 @@ import {
   Switch,
   Route,
   Link,
-  Routes, 
+  Routes,
   useHistory
 } from "react-router-dom";
 var source;
@@ -42,12 +42,8 @@ function SearchRepo() {
 
   // Note: the empty deps array [] means
   // this useEffect will run once
-    const history = useHistory();
-  const onSubmit = (content) => {
-    // if(userFound){
-    //     this.props.history.push('/posts/');
-    // }
-    console.log('hi ', content);
+  const history = useHistory();
+  const onSubmit = content => {
     let path = `repository?value=${content}`;
     history.push(path);
   };
@@ -82,7 +78,7 @@ function SearchRepo() {
 
   // Result render according to search
   const resultRenderer = ({ title }) => (
-      <Label onClick= { () => onSubmit(title)} content={title} />
+    <Label onClick={() => onSubmit(title)} content={title} />
   );
 
   //Handle Search Value
@@ -109,22 +105,21 @@ function SearchRepo() {
     };
   }, []);
   return (
-       
-          <Grid>
-            <Grid.Column>
-              <h1 className="repo">Repositories Search</h1>
-              <Search
-                loading={loading}
-                onResultSelect={(e, data) =>
-                  dispatch({ type: "UPDATE_SELECTION", selection: data.result.title })
-                }
-                onSearchChange={handleSearchChange}
-                resultRenderer={resultRenderer}
-                results={results}
-                value={value}
-              />
-            </Grid.Column>
-          </Grid>
+    <Grid>
+      <Grid.Column>
+        <h1 className="repo">Repositories Search</h1>
+        <Search
+          loading={loading}
+          onResultSelect={(e, data) =>
+            dispatch({ type: "UPDATE_SELECTION", selection: data.result.title })
+          }
+          onSearchChange={handleSearchChange}
+          resultRenderer={resultRenderer}
+          results={results}
+          value={value}
+        />
+      </Grid.Column>
+    </Grid>
   );
 }
 
